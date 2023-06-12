@@ -10,15 +10,20 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import com.clt.speech.AudioManagement;
 import com.clt.speech.G2P;
 import com.clt.speech.Language;
 import com.clt.speech.SpeechException;
+
+import javax.sound.sampled.AudioInputStream;
 
 /**
  * @author dabo
  *
  */
 public abstract class AbstractSynthesizer implements Synthesizer, G2P {
+
+    private AudioInputStream audioInputStreamForManager;
 
     public void speak(File file) throws IOException, SpeechException {
 
@@ -69,5 +74,17 @@ public abstract class AbstractSynthesizer implements Synthesizer, G2P {
         }
         // nothing found.
         return null;
+    }
+
+    //Audio im Audiomanager abspielen
+    public void playAudioInAudioManagement(){
+        AudioManagement audioManagement = new AudioManagement();
+        audioManagement.playAudio(audioInputStreamForManager);
+    }
+    public void setAudioInputStreamForManager(AudioInputStream audioInputStream){
+        this.audioInputStreamForManager = audioInputStream;
+    }
+    public AudioInputStream getAudioInputStreamForManager(){
+        return this.audioInputStreamForManager;
     }
 }

@@ -249,10 +249,15 @@ public class MaryTTS
   * */
   private void speakMaryXML(Document xml, boolean waitUntilDone){
     try {
-      audioPlayer = new AudioPlayer();
+      //audioPlayer = new AudioPlayer();
       AudioInputStream audioIS = mary.generateAudio(xml);
-      audioPlayer.setAudio(audioIS);
-      audioPlayer.start();
+      //audioPlayer.setAudio(audioIS);
+      //audioPlayer.start();
+
+      //Methode von AbstractSyntheziser zum Audio abzuspielen
+      setAudioInputStreamForManager(audioIS);
+      playAudioInAudioManagement();
+
       if (waitUntilDone){
         awaitEndOfSpeech();
       }
