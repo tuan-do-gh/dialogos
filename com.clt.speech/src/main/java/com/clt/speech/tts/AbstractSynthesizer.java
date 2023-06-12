@@ -23,7 +23,6 @@ import javax.sound.sampled.AudioInputStream;
  */
 public abstract class AbstractSynthesizer implements Synthesizer, G2P {
 
-    private AudioInputStream audioInputStreamForManager;
 
     public void speak(File file) throws IOException, SpeechException {
 
@@ -77,14 +76,10 @@ public abstract class AbstractSynthesizer implements Synthesizer, G2P {
     }
 
     //Audio im Audiomanager abspielen
-    public void playAudioInAudioManagement(){
+    public void playAudioInAudioManagement(AudioInputStream audioInputStream){
         AudioManagement audioManagement = new AudioManagement();
-        audioManagement.playAudio(audioInputStreamForManager);
+        audioManagement.setAudioStreamTTS(audioInputStream);
+        audioManagement.playAudio();
     }
-    public void setAudioInputStreamForManager(AudioInputStream audioInputStream){
-        this.audioInputStreamForManager = audioInputStream;
-    }
-    public AudioInputStream getAudioInputStreamForManager(){
-        return this.audioInputStreamForManager;
-    }
+
 }

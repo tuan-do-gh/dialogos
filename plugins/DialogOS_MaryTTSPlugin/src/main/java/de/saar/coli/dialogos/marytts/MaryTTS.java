@@ -255,8 +255,8 @@ public class MaryTTS
       //audioPlayer.start();
 
       //Methode von AbstractSyntheziser zum Audio abzuspielen
-      setAudioInputStreamForManager(audioIS);
-      playAudioInAudioManagement();
+      //setAudioInputStreamForManager(audioIS);
+      playAudioInAudioManagement(audioIS);
 
       if (waitUntilDone){
         awaitEndOfSpeech();
