@@ -27,6 +27,7 @@ import com.clt.script.exp.expressions.Function;
 import com.clt.script.exp.values.IntValue;
 import com.clt.script.exp.values.StringValue;
 import com.clt.script.exp.values.Undefined;
+import com.clt.speech.AudioManagementMicrophone;
 import com.clt.speech.G2P;
 import com.clt.speech.Language;
 import com.clt.speech.SpeechException;
@@ -453,4 +454,12 @@ public abstract class AbstractRecognizer implements Recognizer, G2P {
         return transcriptions;
     }
 
+    //Für Aufnahme mit AudioManagemetn zuständig
+    private AudioManagementMicrophone audioManagementMicrophone = new AudioManagementMicrophone();
+    public void startRecording() {
+        audioManagementMicrophone.start();
+    }
+    public void stopRecording() {
+        audioManagementMicrophone.stop();
+    }
 }
