@@ -1,5 +1,7 @@
 package edu.cmu.lti.dialogos.sphinx.client;
 
+import com.clt.speech.AudioManagementMicrophone;
+import com.clt.speech.NewMicrophone;
 import edu.cmu.sphinx.api.AbstractSpeechRecognizer;
 import edu.cmu.sphinx.api.Context;
 import edu.cmu.sphinx.api.SpeechResult;
@@ -19,7 +21,7 @@ import java.io.InputStream;
 public class ConfigurableSpeechRecognizer extends AbstractSpeechRecognizer {
 
     private Microphone microphone;
-
+    private NewMicrophone newMicrophone;
     public ConfigurableSpeechRecognizer(Context context, InputStream audioSource) throws IOException {
         super(context);
         recognizer.allocate();
@@ -35,22 +37,28 @@ public class ConfigurableSpeechRecognizer extends AbstractSpeechRecognizer {
         if (audioSource != null) {
             sds.setInputStream(audioSource);
         } else {
-            microphone = context.getInstance(Microphone.class);
-            microphone.initialize();
-            sds.setPredecessor(microphone);
+            //microphone = context.getInstance(Microphone.class);
+            //microphone.initialize();
+            //NewMikrophone instanziieren und seinen InputStream übergebem
+            newMicrophone = new NewMicrophone(16000,8, 2,true, false);
+            sds.setInputStream(newMicrophone.getStream());
         }
     }
 
     public synchronized void startRecognition() {
         if (recognizer.getState() == Recognizer.State.DEALLOCATED)
             recognizer.allocate();
-        if (microphone != null) 
-            microphone.startRecording();
+        //if (microphone != null)
+            //microphone.startRecording();
+        //neues Mikrofon
+        newMicrophone.start();
     }
 
     public synchronized void stopRecognition() {
-        if (microphone != null && microphone.isRecording())
-            microphone.stopRecording();
+        //if (microphone != null && microphone.isRecording())
+            //microphone.stopRecording();
+        //neues Mikrofon
+        newMicrophone.stop();
     }
 
     public synchronized void resetRecognition() {

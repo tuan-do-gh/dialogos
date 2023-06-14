@@ -41,16 +41,11 @@ public class AudioManagement {
             sourceDataLine.drain();
             sourceDataLine.close();
             audioStreamTTS.close();
-            textAusgeben();
+            System.out.println("Audio im Audiomanagement!");
         } catch (LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
     };
 
-    public void recordAudio() {
 
-    };
-    public void textAusgeben() {
-        System.out.println("Audio im Audiomanagement!");
-    }
 }

@@ -6,7 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class AudioManagementMicrophone implements Runnable{
-    private AudioFormat format = new AudioFormat(16000, 8, 2, true, true);
+    private AudioFormat format = new AudioFormat(16000, 8, 1, true, false);
     private AudioInputStream audioInputStream;
     public Thread thread;
 
@@ -17,9 +17,11 @@ public class AudioManagementMicrophone implements Runnable{
     public void start() {
         thread = new Thread(this);
         thread.start();
+        System.out.println("Aufnehmen...");
     }
 
     public void stop() {
+        System.out.println("Anhalten...");
         thread = null;
     }
 
@@ -138,5 +140,5 @@ public class AudioManagementMicrophone implements Runnable{
         }
         recorder.playAudio(recorder.getAudioInputStream());
     }
-     
+
 }
